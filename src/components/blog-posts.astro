@@ -1,0 +1,103 @@
+---
+const { posts } = Astro.props;
+---
+
+<ul id="list">
+  {
+    posts &&
+      posts.map((post: any) => (
+        <li id="article">
+            <section id="portrait">
+              <img src={post.frontmatter.image.url} />
+            </section>
+            <section id="description">
+              <a href={post.frontmatter.postUrl}>
+                <h3>{post.frontmatter.title}</h3>
+                <p>{post.frontmatter.description}</p>
+                <p>{post.frontmatter.pubDate}</p>
+              </a>
+              <div id="tags">
+                {
+                  post.frontmatter.tags &&
+                  post.frontmatter.tags.map((tag: string) => <a id="tag" href={"/tags/" + tag}>{tag}</a>)
+                }
+              </div>
+            </section>
+        </li>
+      ))
+  }
+</ul>
+
+<style>
+  /* list style */
+
+  #list {
+    display: grid;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+  }
+
+  #article {
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    gap: 10px;
+  }
+
+  /* portrait style */
+
+  #article #portrait {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #article #portrait > img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* description style */
+
+  #article #description {
+    flex-grow: 1;
+    display: grid;
+    gap: 5px;
+  }
+
+  #article #description a {
+    text-decoration: none;
+    display: grid;
+    gap: 5px;
+  }
+
+  #article #description h3,
+  p {
+    margin: 0;
+  }
+
+  #article #description #tags {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 5px;
+    list-style-type: none;
+  }
+
+  #article #description #tag {
+    padding: 7px 10px;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #5dade2;
+    font-size: 0.7rem;
+    color: white;
+  }
+</style>
