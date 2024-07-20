@@ -1,0 +1,30 @@
+---
+import Social from "./social.astro";
+
+const socials: { platform: string; userName: string }[] = [
+  {
+    platform: "github",
+    userName: "Tcriss",
+  },
+  {
+    platform: "linkedin",
+    userName: "cristiant25",
+  },
+];
+---
+
+<footer>
+  {
+    socials &&
+      socials.map((social) => (
+        <Social platform={social.platform} username={social.userName} />
+      ))
+  }
+</footer>
+<style>
+  footer {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+</style>
